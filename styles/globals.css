@@ -29,4 +29,7 @@
   h1 {
     @apply text-4xl;
   }
+  .swiper {
+    height: 100%;
+  }
 }
