@@ -23,7 +23,7 @@
     font-weight: 900;
   }
   body {
-    font-family: Poppins, sans-serif;
+    font-family: 'Poppins', sans-serif;
     @apply text-gray-500;
   }
   h1 {
