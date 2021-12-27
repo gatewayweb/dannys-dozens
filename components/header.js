@@ -28,7 +28,7 @@ export default function Header({ title }) {
         <title>{title}</title>
         <link rel="icon" href="/favicon.ico" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin={true} />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link
           href="https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Indie+Flower&display=swap"
           rel="stylesheet"

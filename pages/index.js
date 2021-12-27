@@ -9,7 +9,7 @@ import 'swiper/css/effect-fade';
 
 import Header from '@/components/header';
 
-import { getHomepage } from 'lib/api';
+import { getHomepage } from '@/lib/api';
 
 const ImageSlide = ({ image }) => {
   return (
@@ -46,10 +46,6 @@ export default function Home({ page }) {
           </div>
         </div>
       </main>
-
-      <footer className="flex flex-col items-center justify-center w-full py-8 bg-gray-800 text-gray-300 font-light uppercase tracking-widest">
-        Copyright 2021 Dannysdozens.com
-      </footer>
     </>
   );
 }
