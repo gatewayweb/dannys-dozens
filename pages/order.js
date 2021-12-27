@@ -1,11 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 import Header from '@/components/header';
 
 import { getOrderPage } from '@/lib/api';
 import useStore from '@/lib/store';
-import { useEffect } from 'react/cjs/react.development';
 
 export default function Order({ page }) {
   const [orderData, setOrderData] = useState(null);

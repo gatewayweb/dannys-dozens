@@ -1,6 +1,4 @@
-import { useEffect, useRef } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectFade } from 'swiper';
 import 'swiper/css';
