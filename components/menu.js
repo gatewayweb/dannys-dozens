@@ -23,7 +23,7 @@ const links = [
   },
   {
     href: 'mailto:dannysdozens@gmail.com',
-    text: 'Contact Us',
+    text: 'Contact',
   },
 ];
 

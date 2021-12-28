@@ -1,30 +1,10 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import Modal from 'react-modal';
+import { toast } from 'react-toastify';
 
+import Modal from '@/lib/modal';
 import useStore from '@/lib/store';
-
-const modalStyles = {
-  content: {
-    width: '600px',
-    maxWidth: '90%',
-    height: 'auto',
-    minHeight: '0px',
-    boxShadow: '5px 6px 25px 0px rgba(0,0,0,0.1)',
-    border: 'none',
-    borderRadius: '8px',
-    position: 'static',
-  },
-  overlay: {
-    zIndex: '50',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(255,255,255,0.75)',
-    backdropFilter: 'blur(10px)',
-  },
-};
 
 export default function MenuItem({ item }) {
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -37,10 +17,11 @@ export default function MenuItem({ item }) {
         onClick={() => {
           setAdded({ ...item, size });
           addToCart(item, size);
+          toast.success(`${item.name} (${size}) added to your order.`);
         }}
         className="bg-yellow-400 border-b-4 border-l-4 border-yellow-500 text-gray-800 w-full py-3 rounded-lg text-2xl hover:bg-yellow-500"
       >
-        <div className=" text-5xl">+</div>
+        <div className="text-5xl">+</div>
         {size}
       </button>
     );
@@ -75,15 +56,7 @@ export default function MenuItem({ item }) {
           </div>
         </div>
       </div>
-      <Modal
-        style={modalStyles}
-        isOpen={modalIsOpen}
-        onRequestClose={() => {
-          setIsOpen(false);
-        }}
-        contentLabel="Add To Cart"
-        ariaHideApp={false}
-      >
+      <Modal isOpen={modalIsOpen} setIsOpen={setIsOpen} contentLabel="Add To Cart">
         <h3 className="font-light uppercase text-center text-gray-800 text-4xl tracking-tight">
           Add<strong className="block">{item.name}</strong>
         </h3>
@@ -98,9 +71,9 @@ export default function MenuItem({ item }) {
         </div>
         {added ? (
           <>
-            <div className="mx-2 text-center mt-4 bg-green-600 rounded text-white py-3">
+            {/* <div className="mx-2 text-center mt-4 bg-green-600 rounded text-white py-3">
               {item.name} ({added.size}) added to your order.
-            </div>
+            </div> */}
             <div className="flex flex-wrap pt-6">
               <div className="w-full md:w-1/2 px-2 pb-6 md:pb-2">
                 <button

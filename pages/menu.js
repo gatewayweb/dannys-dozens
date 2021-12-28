@@ -1,6 +1,7 @@
+import { ToastContainer } from 'react-toastify';
+
 import Header from '@/components/header';
 import MenuItem from '@/components/menu-item';
-
 import { getMenuPage } from '@/lib/api';
 
 export default function Menu({ page, menu }) {
@@ -20,6 +21,8 @@ export default function Menu({ page, menu }) {
           </div>
         </div>
       </main>
+
+      <ToastContainer position="bottom-right" autoClose={10000} theme="colored" />
     </>
   );
 }

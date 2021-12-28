@@ -32,4 +32,8 @@
   .swiper {
     height: 100%;
   }
+  button,
+  a {
+    @apply duration-200;
+  }
 }
