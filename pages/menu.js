@@ -1,4 +1,5 @@
 import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 import Header from '@/components/header';
 import MenuItem from '@/components/menu-item';
