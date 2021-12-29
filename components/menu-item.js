@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 
 import Modal from '@/lib/modal';
 import useStore from '@/lib/store';
+import Button from './button';
 
 export default function MenuItem({ item }) {
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -13,17 +14,17 @@ export default function MenuItem({ item }) {
 
   const AddButton = ({ size }) => {
     return (
-      <button
+      <Button
         onClick={() => {
           setAdded({ ...item, size });
           addToCart(item, size);
           toast.success(`${item.name} (${size}) added to your order.`);
         }}
-        className="bg-yellow-400 border-b-4 border-l-4 border-yellow-500 text-gray-800 w-full py-3 rounded-lg text-2xl hover:bg-yellow-500"
+        className="w-full py-3 text-2xl"
       >
         <div className="text-5xl">+</div>
         {size}
-      </button>
+      </Button>
     );
   };
 
@@ -45,58 +46,62 @@ export default function MenuItem({ item }) {
             </div>
           </div>
           <div className="pt-6">
-            <button
+            <Button
               onClick={() => {
                 setIsOpen(true);
               }}
-              className="bg-yellow-400 text-gray-800 rounded-full px-8 py-2 font-bold border-b border-yellow-700 duration-150 hover:bg-yellow-500"
+              className=""
             >
               Add to Order
-            </button>
+            </Button>
           </div>
         </div>
       </div>
       <Modal isOpen={modalIsOpen} setIsOpen={setIsOpen} contentLabel="Add To Cart">
-        <h3 className="font-light uppercase text-center text-gray-800 text-4xl tracking-tight">
-          Add<strong className="block">{item.name}</strong>
-        </h3>
-        {/* <div className="pt-2 text-center text-gray-400">How many cookies do you want?</div> */}
-        <div className="flex flex-wrap pt-6">
-          <div className="w-full md:w-1/2 px-2 pb-6 md:pb-2">
-            <AddButton size="Half Dozen" />
+        <div className="relative">
+          <h3 className="font-light uppercase text-center text-gray-800 text-4xl tracking-tight">
+            Add<strong className="block">{item.name}</strong>
+          </h3>
+          <button onClick={() => setIsOpen(false)} className="absolute top-0 right-0 text-3xl font-light md:text-4xl">
+            X
+          </button>
+          {/* <div className="pt-2 text-center text-gray-400">How many cookies do you want?</div> */}
+          <div className="flex flex-wrap pt-6">
+            <div className="w-full md:w-1/2 px-2 pb-6 md:pb-2">
+              <AddButton size="Half Dozen" />
+            </div>
+            <div className="w-full md:w-1/2 px-2 pb-2">
+              <AddButton size="Dozen" />
+            </div>
           </div>
-          <div className="w-full md:w-1/2 px-2 pb-2">
-            <AddButton size="Dozen" />
-          </div>
-        </div>
-        {added ? (
-          <>
-            {/* <div className="mx-2 text-center mt-4 bg-green-600 rounded text-white py-3">
+          {added ? (
+            <>
+              {/* <div className="mx-2 text-center mt-4 bg-green-600 rounded text-white py-3">
               {item.name} ({added.size}) added to your order.
             </div> */}
-            <div className="flex flex-wrap pt-6">
-              <div className="w-full md:w-1/2 px-2 pb-6 md:pb-2">
-                <button
-                  onClick={() => {
-                    setIsOpen(false);
-                  }}
-                  className="font-bold bg-gray-200 border-b-2 border-l-2 border-gray-300 text-gray-800 w-full py-2 rounded hover:bg-gray-300"
-                >
-                  Add More Cookies
-                </button>
-              </div>
-              <div className="w-full md:w-1/2 px-2 pb-2">
-                <Link href="/order">
-                  <a className="font-bold block text-center bg-green-600 border-b-2 border-l-2 border-green-700 text-white w-full py-2 rounded hover:bg-green-700">
+              <div className="flex flex-wrap pt-6">
+                <div className="w-full md:w-1/2 px-2 pb-6 md:pb-2">
+                  <Button
+                    onClick={() => {
+                      setIsOpen(false);
+                    }}
+                    color="gray"
+                    className="w-full"
+                  >
+                    Add More Cookies
+                  </Button>
+                </div>
+                <div className="w-full md:w-1/2 px-2 pb-2">
+                  <Button link="/order" color="green" className="w-full">
                     View my Order
-                  </a>
-                </Link>
+                  </Button>
+                </div>
               </div>
-            </div>
-          </>
-        ) : (
-          <></>
-        )}
+            </>
+          ) : (
+            <></>
+          )}
+        </div>
       </Modal>
     </>
   );

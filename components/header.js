@@ -37,7 +37,7 @@ export default function Header({ title }) {
 
       <Menu />
 
-      <header className="py-3 h-36 flex justify-center">
+      <header className="py-3 h-36 flex justify-start pl-3 sm:justify-center">
         <div ref={logo}>
           <Link href="/" passHref>
             <a>

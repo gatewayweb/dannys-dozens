@@ -21,7 +21,7 @@ export default function Home({ page }) {
   return (
     <>
       <Header title="Dannys Dozens" />
-      <main className="flex flex-col items-center justify-center w-full flex-1 text-center">
+      <main className="flex flex-col items-center justify-center w-full flex-1 text-center pt-12">
         <div className="h-[400px] lg:h-[800px] relative w-screen">
           <Swiper loop speed={3000} effect="fade" autoplay={{ delay: 5000 }} modules={[Autoplay, EffectFade]}>
             {page.images &&

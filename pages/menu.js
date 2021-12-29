@@ -22,7 +22,6 @@ export default function Menu({ page, menu }) {
           </div>
         </div>
       </main>
-
       <ToastContainer position="bottom-right" autoClose={10000} theme="colored" />
     </>
   );
