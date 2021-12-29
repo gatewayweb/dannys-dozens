@@ -37,7 +37,7 @@ export default async (req, res) => {
   setCustomerRow('Phone', customer?.phone);
 
   const emailData = {
-    to: 'sambennett114@gmail.com',
+    to: 'dannysdozens@gmail.com',
     from: 'order@dannysdozens.com',
     subject: 'Online Order',
     name: 'Dannys Dozens',
