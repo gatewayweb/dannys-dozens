@@ -36,10 +36,17 @@ export default function Home({ page }) {
         </div>
         <div className="bg-gray-50 w-full py-16 rounded-t-2xl relative z-10 -top-4">
           <div className="flex flex-col items-center w-full">
+            <h1 className="pb-1 tracking-wider text-gray-700 font-light uppercase">{page.subtitle[2]}</h1>
+            <div className="h-[1px] w-20 bg-gray-500 rounded mt-2"></div>
+          </div>
+          <div className="mission-statement w-[800px] max-w-full mx-auto mt-4 text-gray-600 font-normal text-2xl px-6 pb-12 italic">
+            {page.subtitle[3]}
+          </div>
+          <div className="flex flex-col items-center w-full">
             <h1 className="pb-1 tracking-wider text-gray-700 font-light uppercase">{page.subtitle[0]}</h1>
             <div className="h-[1px] w-20 bg-gray-500 rounded mt-2"></div>
           </div>
-          <div className="mission-statement w-[600px] max-w-full mx-auto mt-4 text-gray-500 tracking-wider px-6">
+          <div className="mission-statement w-[800px] max-w-full mx-auto mt-4 text-gray-500 tracking-wider leading-7 px-6">
             {page.subtitle[1]}
           </div>
         </div>

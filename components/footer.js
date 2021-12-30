@@ -13,7 +13,7 @@ export default function Footer() {
             size="2x"
           />
         </a>
-        <a target="_blank" href="https://www.facebook.com/profile.php?id=100075983513538">
+        <a target="_blank" href="https://www.facebook.com/Dannys-Dozens-107252415164767/">
           <FontAwesomeIcon
             icon={faFacebook}
             className="mx-3 duration-200 text-gray-300 hover:text-gray-100"
