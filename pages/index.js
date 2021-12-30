@@ -9,10 +9,10 @@ import Header from '@/components/header';
 
 import { getHomepage } from '@/lib/api';
 
-const ImageSlide = ({ image }) => {
+const ImageSlide = ({ image, index }) => {
   return (
     <div className="w-screen h-screen max-w-full max-h-full relative">
-      <Image src={image} layout="fill" objectFit="cover" />
+      <Image src={image} layout="fill" objectFit="cover" priority={index === 0 ? true : false} />
     </div>
   );
 };
@@ -28,7 +28,7 @@ export default function Home({ page }) {
               page.images.map((image, index) => {
                 return (
                   <SwiperSlide key={index}>
-                    <ImageSlide image={image.url} />
+                    <ImageSlide image={image.url} index={index} />
                   </SwiperSlide>
                 );
               })}
