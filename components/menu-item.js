@@ -9,8 +9,8 @@ import useStore from '@/lib/store';
 import Button from './button';
 
 export default function MenuItem({ item }) {
-  console.log(item);
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [showIngredients, setShowIngredients] = useState(false);
   const [added, setAdded] = useState(null);
   const addToCart = useStore((state) => state.addToCart);
 
@@ -32,7 +32,7 @@ export default function MenuItem({ item }) {
 
   return (
     <>
-      <div className="w-full md:w-1/2 lg:w-1/3 2xl:w-1/4">
+      <div className="w-full md:w-1/2 xl:w-1/3">
         <div className="px-2 py-8 lg:py-16 text-center border-b-2 border-gray-200 h-full flex flex-col items-center">
           <Image height={100} width={100} src="/cookie.png" />
           <div className="flex-grow">
@@ -54,10 +54,15 @@ export default function MenuItem({ item }) {
               onClick={() => {
                 setIsOpen(true);
               }}
-              className=""
+              className="text-xl"
             >
               Add to Order
             </Button>
+          </div>
+          <div className="pt-4">
+            <div className="px-6 text-sm pt-2 text-gray-400 leading-tight">
+              <strong>ingredients:</strong> {item.ingredients}
+            </div>
           </div>
         </div>
       </div>
