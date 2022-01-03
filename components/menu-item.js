@@ -1,13 +1,15 @@
 import { useState } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import { toast } from 'react-toastify';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 
 import Modal from '@/lib/modal';
 import useStore from '@/lib/store';
 import Button from './button';
 
 export default function MenuItem({ item }) {
+  console.log(item);
   const [modalIsOpen, setIsOpen] = useState(false);
   const [added, setAdded] = useState(null);
   const addToCart = useStore((state) => state.addToCart);
@@ -30,19 +32,21 @@ export default function MenuItem({ item }) {
 
   return (
     <>
-      <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4">
-        <div className="px-2 py-8 text-center border-b-2 border-gray-200">
+      <div className="w-full md:w-1/2 lg:w-1/3 2xl:w-1/4">
+        <div className="px-2 py-8 lg:py-16 text-center border-b-2 border-gray-200 h-full flex flex-col items-center">
           <Image height={100} width={100} src="/cookie.png" />
-          <h3 className="text-yellow-600 font-bold text-3xl font-script mt-2">{item.name}</h3>
-          <div className="text-sm text-gray-500 leading-tight mt-2">{item.description}</div>
-          <div className="text-gray-700 text-lg grid grid-cols-2 mt-4 w-full sm:w-[250px] mx-auto max-w-full">
-            <div className="col-span-1 text-center border-r border-gray-300">
-              <div className="text-xs text-gray-500 pb-1">HALF DOZEN</div>
-              <div className="font-bold text-2xl">${item.pricing.pricePerHalfDozen}</div>
-            </div>
-            <div className="col-span-1 text-center">
-              <div className="text-xs text-gray-500 pb-1">DOZEN</div>
-              <div className="font-bold text-2xl">${item.pricing.pricePerDozen}</div>
+          <div className="flex-grow">
+            <h3 className="text-yellow-600 font-bold text-3xl font-script mt-2">{item.name}</h3>
+            <div className="text-sm text-gray-500 leading-tight mt-2">{item.description}</div>
+            <div className="text-gray-700 text-lg grid grid-cols-2 mt-4 w-full sm:w-[250px] mx-auto max-w-full">
+              <div className="col-span-1 text-center border-r border-gray-300">
+                <div className="text-xs text-gray-500 pb-1">HALF DOZEN</div>
+                <div className="font-bold text-2xl">${item.pricing.pricePerHalfDozen}</div>
+              </div>
+              <div className="col-span-1 text-center">
+                <div className="text-xs text-gray-500 pb-1">DOZEN</div>
+                <div className="font-bold text-2xl">${item.pricing.pricePerDozen}</div>
+              </div>
             </div>
           </div>
           <div className="pt-6">
@@ -73,6 +77,15 @@ export default function MenuItem({ item }) {
             <div className="w-full md:w-1/2 px-2 pb-2">
               <AddButton size="Dozen" />
             </div>
+          </div>
+          <div>
+            {item.containsNuts ? (
+              <span className="text-orange-300 uppercase font-bold flex items-center justify-center pt-4">
+                <FontAwesomeIcon icon={faExclamationTriangle} className="mr-1" /> Contains nuts
+              </span>
+            ) : (
+              ''
+            )}
           </div>
           {added ? (
             <>

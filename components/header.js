@@ -27,6 +27,10 @@ export default function Header({ title }) {
       <Head>
         <title>{title}</title>
         <link rel="icon" href="/favicon.ico" />
+        <meta
+          name="description"
+          content="The best cookies ever made. We use premium ingredients and offer excellent customer service."
+        />
       </Head>
 
       <Menu />
