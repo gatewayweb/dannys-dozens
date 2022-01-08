@@ -13,6 +13,7 @@ export default function Order({ page }) {
   const [orderData, setOrderData] = useState(null);
   const [modalIsOpen, setIsOpen] = useState(false);
   const [orderSuccess, setOrderSuccess] = useState(false);
+  const [cartQuantity, setCartQuantity] = useState(0);
   const [customer, setCustomer] = useState({
     email: '',
     name: '',
@@ -26,6 +27,24 @@ export default function Order({ page }) {
   useEffect(() => {
     setOrderData(cart);
     setOrderTotal(cart);
+
+    if (cart && cart.length) {
+      let newQuantity = 0;
+      cart.forEach((item) => {
+        let cookieQuantity = 1;
+        switch (item.size) {
+          case 'Dozen':
+            cookieQuantity = 12;
+            break;
+          case 'Half Dozen':
+            cookieQuantity = 6;
+        }
+        newQuantity += parseInt(item.quantity) * cookieQuantity;
+      });
+      setCartQuantity(newQuantity);
+    } else {
+      setCartQuantity(0);
+    }
   }, [cart]);
 
   return (
@@ -53,6 +72,13 @@ export default function Order({ page }) {
                   <></>
                 )}
 
+                {cartQuantity < 6 ? (
+                  <div className="text-center py-3">
+                    To place an order, you must add at least 6 cookies to your order. Thanks!
+                  </div>
+                ) : (
+                  ''
+                )}
                 <div className="flex justify-center flex-wrap">
                   <Link href="/menu">
                     <a className="bg-yellow-400 mx-2 mt-2 px-6 py-2 text-lg rounded-lg border-b-2 border-yellow-500 font-bold text-gray-800 hover:bg-yellow-500">
@@ -60,7 +86,8 @@ export default function Order({ page }) {
                     </a>
                   </Link>
                   <button
-                    className="bg-green-600 mx-2 mt-2 px-6 py-2 text-lg rounded-lg border-b-2 border-green-700 font-bold text-white hover:bg-green-700"
+                    className="bg-green-600 mx-2 mt-2 px-6 py-2 text-lg rounded-lg border-b-2 border-green-700 font-bold text-white hover:bg-green-700 disabled:bg-gray-300 disabled:border-none"
+                    disabled={cartQuantity < 6}
                     onClick={() => {
                       setIsOpen(true);
                     }}
@@ -75,7 +102,6 @@ export default function Order({ page }) {
                   <div className="text-2xl text-gray-600 pt-8 pb-12">
                     You haven't added any cookies to your order yet!
                   </div>
-
                   <Button link="/menu" className="text-2xl">
                     Add Cookies
                   </Button>

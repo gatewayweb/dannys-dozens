@@ -3,6 +3,11 @@ import Image from 'next/image';
 import { toast } from 'react-toastify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, EffectFade } from 'swiper';
+import 'swiper/css';
+import 'swiper/css/autoplay';
+import 'swiper/css/effect-fade';
 
 import Modal from '@/lib/modal';
 import useStore from '@/lib/store';
@@ -10,7 +15,6 @@ import Button from './button';
 
 export default function MenuItem({ item }) {
   const [modalIsOpen, setIsOpen] = useState(false);
-  const [showIngredients, setShowIngredients] = useState(false);
   const [added, setAdded] = useState(null);
   const addToCart = useStore((state) => state.addToCart);
 
@@ -32,9 +36,28 @@ export default function MenuItem({ item }) {
 
   return (
     <>
-      <div className="w-full md:w-1/2 xl:w-1/3">
-        <div className="px-2 py-8 lg:py-16 text-center border-b-2 border-gray-200 h-full flex flex-col items-center">
-          <Image height={100} width={100} src="/cookie.png" />
+      <div className="w-full md:w-1/2 xl:w-1/3 px-3 mb-6">
+        <div className="text-center border-b-4 border-gray-100 h-full flex flex-col items-center rounded-lg bg-white py-8 lg:py-16">
+          {!item.images || !item.images.length || !item.images[0] || !item.images[1]}
+          {/* <Image height={100} width={100} src="/cookie.png" /> */}
+          <div className="max-w-full flex justify-center items-center">
+            <Swiper loop speed={2000} effect="fade" autoplay={{ delay: 5000 }} modules={[Autoplay, EffectFade]}>
+              <SwiperSlide>
+                <div className="flex justify-center bg-white">
+                  <div className="relative w-[150px] h-[150px]">
+                    <Image layout="fill" objectFit="fill" src={item.images[0].url} quality={100} />
+                  </div>
+                </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div className="flex justify-center bg-white">
+                  <div className="relative w-[200px] h-[150px]">
+                    <Image layout="fill" objectFit="fill" src={item.images[1].url} quality={100} />
+                  </div>
+                </div>
+              </SwiperSlide>
+            </Swiper>
+          </div>
           <div className="flex-grow">
             <h3 className="text-yellow-600 font-bold text-3xl font-script mt-2">{item.name}</h3>
             <div className="text-sm text-gray-500 leading-tight mt-2">{item.description}</div>
@@ -76,10 +99,13 @@ export default function MenuItem({ item }) {
           </button>
           {/* <div className="pt-2 text-center text-gray-400">How many cookies do you want?</div> */}
           <div className="flex flex-wrap pt-6">
-            <div className="w-full md:w-1/2 px-2 pb-6 md:pb-2">
+            <div className="w-full md:w-1/3 px-2 pb-6 md:pb-2">
+              <AddButton size="Single" />
+            </div>
+            <div className="w-full md:w-1/3 px-2 pb-6 md:pb-2">
               <AddButton size="Half Dozen" />
             </div>
-            <div className="w-full md:w-1/2 px-2 pb-2">
+            <div className="w-full md:w-1/3 px-2 pb-2">
               <AddButton size="Dozen" />
             </div>
           </div>
