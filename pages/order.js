@@ -64,8 +64,10 @@ export default function Order({ page }) {
                 </div>
 
                 {orderTotal && orderTotal > 0 ? (
-                  <div className="bg-white border rounded-lg mb-5 px-6 py-4 flex flex-col md:flex-row items-center justify-between">
-                    <h3 className="font-bold leading-tight text-center md:text-xl md:text-left">Order Total</h3>
+                  <div className="bg-white border border-b-4 border-gray-200 rounded-lg mb-5 px-6 py-4 flex flex-col md:flex-row items-center justify-between text-gray-700">
+                    <h3 className="font-bold leading-tight text-center md:text-xl md:text-left">
+                      Order Total ({cartQuantity} Cookies)
+                    </h3>
                     <span className="text-2xl">${orderTotal}</span>
                   </div>
                 ) : (
@@ -81,12 +83,12 @@ export default function Order({ page }) {
                 )}
                 <div className="flex justify-center flex-wrap">
                   <Link href="/menu">
-                    <a className="bg-yellow-400 mx-2 mt-2 px-6 py-2 text-lg rounded-lg border-b-2 border-yellow-500 font-bold text-gray-800 hover:bg-yellow-500">
+                    <a className="bg-yellow-400 mx-2 mt-4 px-6 py-2 text-2xl rounded-lg border-b-2 border-yellow-500 font-bold text-gray-800 hover:bg-yellow-500">
                       Add More Cookies
                     </a>
                   </Link>
                   <button
-                    className="bg-green-600 mx-2 mt-2 px-6 py-2 text-lg rounded-lg border-b-2 border-green-700 font-bold text-white hover:bg-green-700 disabled:bg-gray-300 disabled:border-none"
+                    className="bg-green-600 mx-2 mt-4 px-6 py-2 text-2xl rounded-lg border-b-2 border-green-700 font-bold text-white hover:bg-green-700 disabled:bg-gray-300 disabled:border-none"
                     disabled={cartQuantity < 6}
                     onClick={() => {
                       setIsOpen(true);

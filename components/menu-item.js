@@ -29,7 +29,7 @@ export default function MenuItem({ item }) {
         className="w-full py-3 text-2xl"
       >
         <div className="text-5xl">+</div>
-        {size}
+        <span className="font-normal">{size}</span>
       </Button>
     );
   };
@@ -37,11 +37,18 @@ export default function MenuItem({ item }) {
   return (
     <>
       <div className="w-full md:w-1/2 xl:w-1/3 px-3 mb-6">
-        <div className="text-center border-b-4 border-gray-100 h-full flex flex-col items-center rounded-lg bg-white py-8 lg:py-16">
+        <div className="text-center border border-b-4 border-gray-200 h-full flex flex-col items-center rounded-lg bg-white py-8 lg:py-16">
           {!item.images || !item.images.length || !item.images[0] || !item.images[1]}
           {/* <Image height={100} width={100} src="/cookie.png" /> */}
           <div className="max-w-full flex justify-center items-center">
-            <Swiper loop speed={2000} effect="fade" autoplay={{ delay: 5000 }} modules={[Autoplay, EffectFade]}>
+            <Swiper
+              loop
+              allowTouchMove={false}
+              speed={2000}
+              effect="fade"
+              autoplay={{ delay: 5000 }}
+              modules={[Autoplay, EffectFade]}
+            >
               <SwiperSlide>
                 <div className="flex justify-center bg-white">
                   <div className="relative w-[150px] h-[150px]">
@@ -59,9 +66,13 @@ export default function MenuItem({ item }) {
             </Swiper>
           </div>
           <div className="flex-grow">
-            <h3 className="text-yellow-600 font-bold text-3xl font-script mt-2">{item.name}</h3>
+            <h3 className="text-yellow-600 font-normal text-2xl mt-4 px-6">{item.name}</h3>
             <div className="text-sm text-gray-500 leading-tight mt-2">{item.description}</div>
-            <div className="text-gray-700 text-lg grid grid-cols-2 mt-4 w-full sm:w-[250px] mx-auto max-w-full">
+            <div className="text-gray-700 text-lg grid grid-cols-3 mt-4 w-full sm:w-[250px] mx-auto max-w-full">
+              <div className="col-span-1 text-center border-r border-gray-300">
+                <div className="text-xs text-gray-500 pb-1">SINGLE</div>
+                <div className="font-bold text-2xl">${item.pricing.pricePerSingle}</div>
+              </div>
               <div className="col-span-1 text-center border-r border-gray-300">
                 <div className="text-xs text-gray-500 pb-1">HALF DOZEN</div>
                 <div className="font-bold text-2xl">${item.pricing.pricePerHalfDozen}</div>
@@ -92,7 +103,7 @@ export default function MenuItem({ item }) {
       <Modal isOpen={modalIsOpen} setIsOpen={setIsOpen} contentLabel="Add To Cart">
         <div className="relative">
           <h3 className="font-light uppercase text-center text-gray-800 text-4xl tracking-tight">
-            Add<strong className="block">{item.name}</strong>
+            Add To Order<strong className="block">{item.name}</strong>
           </h3>
           <button onClick={() => setIsOpen(false)} className="absolute top-0 right-0 text-3xl font-light md:text-4xl">
             X
@@ -111,7 +122,7 @@ export default function MenuItem({ item }) {
           </div>
           <div>
             {item.containsNuts ? (
-              <span className="text-orange-300 uppercase font-bold flex items-center justify-center pt-4">
+              <span className="text-orange-500 uppercase flex items-center justify-center pt-4">
                 <FontAwesomeIcon icon={faExclamationTriangle} className="mr-1" /> Contains nuts
               </span>
             ) : (
