@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { toast } from 'react-toastify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+import { faExclamationTriangle, faCookieBite } from '@fortawesome/free-solid-svg-icons';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectFade } from 'swiper';
 import 'swiper/css';
@@ -37,7 +37,15 @@ export default function MenuItem({ item }) {
   return (
     <>
       <div className="w-full md:w-1/2 xl:w-1/3 px-3 mb-6">
-        <div className="text-center border border-b-4 border-gray-200 h-full flex flex-col items-center rounded-lg bg-white py-8 lg:py-16">
+        <div className="relative text-center border border-b-4 border-gray-200 h-full flex flex-col items-center rounded-lg bg-white py-8 lg:py-16">
+          {item.id === 'ckxev5a5cx3q50a767sumspcq' ? (
+            <div className="absolute top-4 right-4 bg-green-600 text-white rounded-full font-bold px-4 py-1 drop-shadow-lg">
+              <FontAwesomeIcon icon={faCookieBite} color="white" />
+              <span className="inline-block pl-2">Cookie of the month</span>
+            </div>
+          ) : (
+            <></>
+          )}
           {!item.images || !item.images.length || !item.images[0] || !item.images[1]}
           {/* <Image height={100} width={100} src="/cookie.png" /> */}
           <div className="max-w-full flex justify-center items-center">
