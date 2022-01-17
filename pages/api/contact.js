@@ -50,6 +50,18 @@ export default async (req, res) => {
       <table width="100%" style="width:100%;" cellspacing="0">
         ${customerInfo}
         ${orderItems}
+        <tr>
+          <td style="padding-top:12px;padding-bottom:12px;border-bottom:2px solid #ccc;">
+            <h2>Payment via Venmo</h2>
+            <strong>Venmo:</strong> @dangavigan
+          </td>
+        </tr>
+        <tr>
+          <td style="padding-top:12px;padding-bottom:12px;border-bottom:2px solid #ccc;">
+            <strong>Payment Instructions:</strong>
+            Payment for orders must be sent in within 24d hours upon placing order. Orders placed on Monday-Wednesday will be baked on Wednesdays and ready for local pickup or delivery that same night. Orders placed on Thursday-Sunday will be baked on Sunday and ready for local pickup or delivery that same night.
+          </td>
+        </tr>
       </table>`,
   };
 

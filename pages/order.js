@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import 'react-toastify/dist/ReactToastify.min.css';
 
 import { getOrderPage } from '@/lib/api';
@@ -51,7 +52,7 @@ export default function Order({ page }) {
     <>
       <Header title="Dannys Dozens | Order Online" />
       <main className="px-6 py-12 flex-grow">
-        {!orderSuccess ? (
+        {orderSuccess ? (
           <div className="relative rounded-xl overflow-hidden bg-gradient-to-br from-gray-100 to-white p-4 md:p-8 max-w-full mx-auto">
             <h1 className="relative font-light text-center text-gray-500 mb-4 uppercase text-5xl">{page.title}</h1>
             {orderData && orderData.length ? (
@@ -117,6 +118,13 @@ export default function Order({ page }) {
             <h1 className="relative font-bold text-center text-green-600 mb-4 uppercase text-5xl">Thank You!</h1>
             <div className="relative text-2xl mt-2 mb-8 md:w-[500px] max-w-full mx-auto text-center text-gray-600">
               We got your order and will be in touch soon, keep an eye out for an email or call from us.
+            </div>
+            <div className="relative w-full md:w-3/5 xl:w-2/5 mx-auto bg-white p-12 rounded-lg overflow-hidden drop-shadow-2xl mb-12">
+              <Link href="https://venmo.com/u/DannysDozens" passHref>
+                <a>
+                  <Image src="/venmo.png" width={978} height={1375} layout="responsive" />
+                </a>
+              </Link>
             </div>
             <Button color="gray" link="/" className="relative">
               Home
