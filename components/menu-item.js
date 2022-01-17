@@ -13,7 +13,7 @@ import Modal from '@/lib/modal';
 import useStore from '@/lib/store';
 import Button from './button';
 
-export default function MenuItem({ item }) {
+export default function MenuItem({ item, flavorOfTheMonth }) {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [added, setAdded] = useState(null);
   const addToCart = useStore((state) => state.addToCart);
@@ -38,8 +38,8 @@ export default function MenuItem({ item }) {
     <>
       <div className="w-full md:w-1/2 xl:w-1/3 px-3 mb-6">
         <div className="relative text-center border border-b-4 border-gray-200 h-full flex flex-col items-center rounded-lg bg-white py-8 lg:py-16">
-          {item.id === 'ckxev5a5cx3q50a767sumspcq' ? (
-            <div className="absolute top-4 right-4 bg-green-600 text-white rounded-full font-bold px-4 py-1 drop-shadow-lg">
+          {flavorOfTheMonth ? (
+            <div className="absolute top-4 right-4 bg-green-600 text-white rounded-full font-bold px-4 py-1 drop-shadow-lg z-10 text-sm lg:text-base">
               <FontAwesomeIcon icon={faCookieBite} color="white" />
               <span className="inline-block pl-2">Cookie of the month</span>
             </div>
@@ -74,7 +74,7 @@ export default function MenuItem({ item }) {
             </Swiper>
           </div>
           <div className="flex-grow">
-            <h3 className="text-yellow-600 font-normal text-2xl mt-4 px-6">{item.name}</h3>
+            <h3 className="text-yellow-600 font-normal text-lg md:text-2xl mt-4 px-6">{item.name}</h3>
             <div className="text-sm text-gray-500 leading-tight mt-2">{item.description}</div>
             <div className="text-gray-700 text-lg grid grid-cols-3 mt-4 w-full sm:w-[250px] mx-auto max-w-full">
               <div className="col-span-1 text-center border-r border-gray-300">
