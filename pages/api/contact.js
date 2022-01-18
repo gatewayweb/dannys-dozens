@@ -59,7 +59,13 @@ export default async (req, res) => {
         <tr>
           <td style="padding-top:12px;padding-bottom:12px;border-bottom:2px solid #ccc;">
             <strong>Payment Instructions:</strong>
-            Payment for orders must be sent in within 24d hours upon placing order. Orders placed on Monday-Wednesday will be baked on Wednesdays and ready for local pickup or delivery that same night. Orders placed on Thursday-Sunday will be baked on Sunday and ready for local pickup or delivery that same night.
+            Payment for orders must be sent in within 24 hours upon placing order.
+          </td>
+        </tr>
+        <tr>
+          <td style="padding-top:12px;padding-bottom:12px;border-bottom:2px solid #ccc;">
+            <strong>Pickup & Delivery:</strong>
+            Baking is done once a week. Orders placed by noon on Saturdays will be baked and ready for pickup or delivery Sunday evenings.
           </td>
         </tr>
       </table>`,
