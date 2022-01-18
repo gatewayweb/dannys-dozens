@@ -52,7 +52,7 @@ export default function Order({ page }) {
     <>
       <Header title="Dannys Dozens | Order Online" />
       <main className="px-6 py-12 flex-grow">
-        {orderSuccess ? (
+        {!orderSuccess ? (
           <div className="relative rounded-xl overflow-hidden bg-gradient-to-br from-gray-100 to-white p-4 md:p-8 max-w-full mx-auto">
             <h1 className="relative font-light text-center text-gray-500 mb-4 uppercase text-5xl">{page.title}</h1>
             {orderData && orderData.length ? (
