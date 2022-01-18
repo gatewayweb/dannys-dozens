@@ -10,6 +10,15 @@ import OrderModal from '@/components/order-modal';
 import OrderItem from '@/components/order-item';
 import Button from '@/components/button';
 
+const formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+});
+
+const formatPrice = (price) => {
+  return price % 1 !== 0 ? formatter.format(price) : `$${price}`;
+};
+
 export default function Order({ page }) {
   const [orderData, setOrderData] = useState(null);
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -69,7 +78,7 @@ export default function Order({ page }) {
                     <h3 className="font-bold leading-tight text-center md:text-xl md:text-left">
                       Order Total ({cartQuantity} Cookies)
                     </h3>
-                    <span className="text-2xl">${orderTotal}</span>
+                    <span className="text-2xl">{formatPrice(orderTotal)}</span>
                   </div>
                 ) : (
                   <></>

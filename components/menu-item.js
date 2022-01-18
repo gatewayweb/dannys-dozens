@@ -13,6 +13,15 @@ import Modal from '@/lib/modal';
 import useStore from '@/lib/store';
 import Button from './button';
 
+const formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+});
+
+const formatPrice = (price) => {
+  return price % 1 !== 0 ? formatter.format(price) : `$${price}`;
+};
+
 export default function MenuItem({ item, flavorOfTheMonth }) {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [added, setAdded] = useState(null);
@@ -76,18 +85,18 @@ export default function MenuItem({ item, flavorOfTheMonth }) {
           <div className="flex-grow">
             <h3 className="text-yellow-600 font-normal text-lg md:text-2xl mt-4 px-6">{item.name}</h3>
             <div className="text-sm text-gray-500 leading-tight mt-2">{item.description}</div>
-            <div className="text-gray-700 text-lg grid grid-cols-3 mt-4 w-full sm:w-[250px] mx-auto max-w-full">
+            <div className="text-gray-700 text-lg grid grid-cols-3 mt-4 w-full sm:w-[300px] mx-auto max-w-full">
               <div className="col-span-1 text-center border-r border-gray-300">
                 <div className="text-xs text-gray-500 pb-1">SINGLE</div>
-                <div className="font-bold text-2xl">${item.pricing.pricePerSingle}</div>
+                <div className="font-bold text-2xl">{formatPrice(item.pricing.pricePerSingle)}</div>
               </div>
               <div className="col-span-1 text-center border-r border-gray-300">
                 <div className="text-xs text-gray-500 pb-1">HALF DOZEN</div>
-                <div className="font-bold text-2xl">${item.pricing.pricePerHalfDozen}</div>
+                <div className="font-bold text-2xl">{formatPrice(item.pricing.pricePerHalfDozen)}</div>
               </div>
               <div className="col-span-1 text-center">
                 <div className="text-xs text-gray-500 pb-1">DOZEN</div>
-                <div className="font-bold text-2xl">${item.pricing.pricePerDozen}</div>
+                <div className="font-bold text-2xl">{formatPrice(item.pricing.pricePerDozen)}</div>
               </div>
             </div>
           </div>

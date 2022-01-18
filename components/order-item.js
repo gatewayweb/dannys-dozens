@@ -26,7 +26,11 @@ export default function OrderItem({ cartItem, index }) {
           <div className="mt-1 md:mt-0">
             <div
               className={`text-sm font tracking-widest uppercase text-white border-b-2 ${
-                size === 'Half Dozen' ? 'bg-blue-600 border-blue-900' : 'bg-green-600 border-green-800'
+                size === 'Half Dozen'
+                  ? 'bg-blue-600 border-blue-900'
+                  : size === 'Dozen'
+                  ? 'bg-green-600 border-green-800'
+                  : 'bg-purple-500 border-purple-700'
               } px-4 py-1 rounded-full inline-block`}
             >
               {size}
