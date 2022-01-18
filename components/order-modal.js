@@ -10,6 +10,7 @@ const labelStyles = 'text-gray-700 uppercase text-sm tracking-wide';
 
 export default function OrderModal({ isOpen, setIsOpen, customer, setCustomer, setOrderSuccess }) {
   const [canOrder, setCanOrder] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const cart = useStore((state) => state.cart) || [];
   const emptyCart = useStore((state) => state.emptyCart);
 
@@ -27,6 +28,7 @@ export default function OrderModal({ isOpen, setIsOpen, customer, setCustomer, s
   }, [customer]);
 
   const submitOrder = async () => {
+    setIsSubmitting(true);
     try {
       const response = await fetch('/api/contact', {
         method: 'POST',
@@ -40,11 +42,14 @@ export default function OrderModal({ isOpen, setIsOpen, customer, setCustomer, s
         setIsOpen(false);
         emptyCart();
         setOrderSuccess(true);
+        setIsSubmitting(false);
       } else {
+        setIsSubmitting(false);
         throw new Error('There was an error, please email us directly at dannysdozens@gmail.com');
       }
     } catch (error) {
       console.log(error);
+      setIsSubmitting(false);
       toast.error('There was an error, please email us directly at dannysdozens@gmail.com');
     }
   };
@@ -103,7 +108,12 @@ export default function OrderModal({ isOpen, setIsOpen, customer, setCustomer, s
           </div>
           {canOrder ? (
             <div className="flex flex-col-reverse flex-wrap justify-center items-center">
-              <Button onClick={submitOrder} color="green" className="mx-2 mt-2 text-lg sm:text-2xl">
+              <Button
+                disabled={isSubmitting}
+                onClick={submitOrder}
+                color="green"
+                className="mx-2 mt-2 text-lg sm:text-2xl"
+              >
                 Submit Order
               </Button>
             </div>
