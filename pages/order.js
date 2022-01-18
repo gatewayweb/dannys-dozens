@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import 'react-toastify/dist/ReactToastify.min.css';
 
 import { getOrderPage } from '@/lib/api';
@@ -13,6 +14,7 @@ export default function Order({ page }) {
   const [orderData, setOrderData] = useState(null);
   const [modalIsOpen, setIsOpen] = useState(false);
   const [orderSuccess, setOrderSuccess] = useState(false);
+  const [cartQuantity, setCartQuantity] = useState(0);
   const [customer, setCustomer] = useState({
     email: '',
     name: '',
@@ -26,6 +28,24 @@ export default function Order({ page }) {
   useEffect(() => {
     setOrderData(cart);
     setOrderTotal(cart);
+
+    if (cart && cart.length) {
+      let newQuantity = 0;
+      cart.forEach((item) => {
+        let cookieQuantity = 1;
+        switch (item.size) {
+          case 'Dozen':
+            cookieQuantity = 12;
+            break;
+          case 'Half Dozen':
+            cookieQuantity = 6;
+        }
+        newQuantity += parseInt(item.quantity) * cookieQuantity;
+      });
+      setCartQuantity(newQuantity);
+    } else {
+      setCartQuantity(0);
+    }
   }, [cart]);
 
   return (
@@ -45,22 +65,32 @@ export default function Order({ page }) {
                 </div>
 
                 {orderTotal && orderTotal > 0 ? (
-                  <div className="bg-white border rounded-lg mb-5 px-6 py-4 flex flex-col md:flex-row items-center justify-between">
-                    <h3 className="font-bold leading-tight text-center md:text-xl md:text-left">Order Total</h3>
+                  <div className="bg-white border border-b-4 border-gray-200 rounded-lg mb-5 px-6 py-4 flex flex-col md:flex-row items-center justify-between text-gray-700">
+                    <h3 className="font-bold leading-tight text-center md:text-xl md:text-left">
+                      Order Total ({cartQuantity} Cookies)
+                    </h3>
                     <span className="text-2xl">${orderTotal}</span>
                   </div>
                 ) : (
                   <></>
                 )}
 
+                {cartQuantity < 6 ? (
+                  <div className="text-center py-3">
+                    To place an order, you must add at least 6 cookies to your order. Thanks!
+                  </div>
+                ) : (
+                  ''
+                )}
                 <div className="flex justify-center flex-wrap">
                   <Link href="/menu">
-                    <a className="bg-yellow-400 mx-2 mt-2 px-6 py-2 text-lg rounded-lg border-b-2 border-yellow-500 font-bold text-gray-800 hover:bg-yellow-500">
+                    <a className="bg-yellow-400 mx-2 mt-4 px-6 py-2 text-2xl rounded-lg border-b-2 border-yellow-500 font-bold text-gray-800 hover:bg-yellow-500">
                       Add More Cookies
                     </a>
                   </Link>
                   <button
-                    className="bg-green-600 mx-2 mt-2 px-6 py-2 text-lg rounded-lg border-b-2 border-green-700 font-bold text-white hover:bg-green-700"
+                    className="bg-green-600 mx-2 mt-4 px-6 py-2 text-2xl rounded-lg border-b-2 border-green-700 font-bold text-white hover:bg-green-700 disabled:bg-gray-300 disabled:border-none"
+                    disabled={cartQuantity < 6}
                     onClick={() => {
                       setIsOpen(true);
                     }}
@@ -75,7 +105,6 @@ export default function Order({ page }) {
                   <div className="text-2xl text-gray-600 pt-8 pb-12">
                     You haven't added any cookies to your order yet!
                   </div>
-
                   <Button link="/menu" className="text-2xl">
                     Add Cookies
                   </Button>
@@ -89,6 +118,13 @@ export default function Order({ page }) {
             <h1 className="relative font-bold text-center text-green-600 mb-4 uppercase text-5xl">Thank You!</h1>
             <div className="relative text-2xl mt-2 mb-8 md:w-[500px] max-w-full mx-auto text-center text-gray-600">
               We got your order and will be in touch soon, keep an eye out for an email or call from us.
+            </div>
+            <div className="relative w-full md:w-3/5 xl:w-2/5 mx-auto bg-white p-12 rounded-lg overflow-hidden drop-shadow-2xl mb-12">
+              <Link href="https://venmo.com/u/DannysDozens" passHref>
+                <a>
+                  <Image src="/venmo.png" width={978} height={1375} layout="responsive" />
+                </a>
+              </Link>
             </div>
             <Button color="gray" link="/" className="relative">
               Home

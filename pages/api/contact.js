@@ -4,9 +4,13 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 export default async (req, res) => {
   const { cart, customer } = req.body;
-  // const { email, subject, message, name } = req.body;
   let orderItems = 'No items in order.';
   let customerInfo = '';
+
+  var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  if (!cart || !customer || !customer.email || customer.email === '' || !mailformat.test(customer.email)) {
+    res.status(500).json({ error: 'Invalid email' });
+  }
 
   if (typeof cart !== 'undefined' && cart && cart.length) {
     orderItems = '';
@@ -37,20 +41,38 @@ export default async (req, res) => {
   setCustomerRow('Phone', customer?.phone);
 
   const emailData = {
-    to: 'dannysdozens@gmail.com',
+    to: ['dannysdozens@gmail.com', customer.email],
     from: 'order@dannysdozens.com',
     subject: 'Online Order',
     name: 'Dannys Dozens',
     html: `
-      <h1>Online Order</h1>
+      <h1>Cookie Order</h1>
       <table width="100%" style="width:100%;" cellspacing="0">
         ${customerInfo}
         ${orderItems}
+        <tr>
+          <td style="padding-top:12px;padding-bottom:12px;border-bottom:2px solid #ccc;">
+            <h2>Payment via Venmo</h2>
+            <strong>Venmo:</strong> @dangavigan
+          </td>
+        </tr>
+        <tr>
+          <td style="padding-top:12px;padding-bottom:12px;border-bottom:2px solid #ccc;">
+            <strong>Payment Instructions:</strong>
+            Payment for orders must be sent in within 24 hours upon placing order.
+          </td>
+        </tr>
+        <tr>
+          <td style="padding-top:12px;padding-bottom:12px;border-bottom:2px solid #ccc;">
+            <strong>Pickup & Delivery:</strong>
+            Baking is done once a week. Orders placed by noon on Saturdays will be baked and ready for pickup or delivery Sunday evenings.
+          </td>
+        </tr>
       </table>`,
   };
 
   try {
-    await sgMail.send(emailData);
+    await sgMail.sendMultiple(emailData);
     res.json({ message: `Email has been sent` });
   } catch (error) {
     res.status(500).json({ error: 'Error sending email' });
