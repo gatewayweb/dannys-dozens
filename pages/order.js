@@ -126,15 +126,16 @@ export default function Order({ page }) {
             <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-green-100 to-white opacity-40"></div>
             <h1 className="relative font-bold text-center text-green-600 mb-4 uppercase text-5xl">Thank You!</h1>
             <div className="relative text-2xl mt-2 mb-8 md:w-[500px] max-w-full mx-auto text-center text-gray-600">
-              We got your order and will be in touch soon, keep an eye out for an email or call from us.
+              We got your order and will be in touch soon, keep an eye out for an email or call from us. Feel free to
+              text my phone (508) 942-4976 for payment instructions.
             </div>
-            <div className="relative w-full md:w-3/5 xl:w-2/5 mx-auto bg-white p-12 rounded-lg overflow-hidden drop-shadow-2xl mb-12">
+            {/* <div className="relative w-full md:w-3/5 xl:w-2/5 mx-auto bg-white p-12 rounded-lg overflow-hidden drop-shadow-2xl mb-12">
               <Link href="https://venmo.com/u/DannysDozens" passHref>
                 <a>
                   <Image src="/venmo.png" width={978} height={1375} layout="responsive" />
                 </a>
               </Link>
-            </div>
+            </div> */}
             <Button color="gray" link="/" className="relative">
               Home
             </Button>
