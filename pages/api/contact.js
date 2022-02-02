@@ -53,13 +53,13 @@ export default async (req, res) => {
         <tr>
           <td style="padding-top:12px;padding-bottom:12px;border-bottom:2px solid #ccc;">
             <h2>Payment via Venmo</h2>
-            <strong>Venmo:</strong> @dangavigan
+            Please text my phone (508) 942-4976 for payment instructions.
           </td>
         </tr>
         <tr>
           <td style="padding-top:12px;padding-bottom:12px;border-bottom:2px solid #ccc;">
             <strong>Payment Instructions:</strong>
-            Payment for orders must be sent in within 24 hours upon placing order.
+            Payment for orders must be sent in within 24 hours upon placing order. Please mark the memo as "Reimbursement for food". Thanks!
           </td>
         </tr>
         <tr>
