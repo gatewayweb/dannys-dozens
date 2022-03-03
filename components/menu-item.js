@@ -58,7 +58,7 @@ export default function MenuItem({ item, flavorOfTheMonth }) {
           {!item.images || !item.images.length || !item.images[0] || !item.images[1]}
           {/* <Image height={100} width={100} src="/cookie.png" /> */}
           <div className="max-w-full flex justify-center items-center">
-            {item?.images && item?.images?.length > 1 ? (
+            {item?.images && item?.images?.length ? (
               <Swiper
                 loop
                 allowTouchMove={false}
@@ -67,20 +67,28 @@ export default function MenuItem({ item, flavorOfTheMonth }) {
                 autoplay={{ delay: 5000 }}
                 modules={[Autoplay, EffectFade]}
               >
-                <SwiperSlide>
-                  <div className="flex justify-center bg-white">
-                    <div className="relative w-[150px] h-[150px]">
-                      <Image layout="fill" objectFit="fill" src={item.images[0].url} quality={100} />
+                {item.images[0] ? (
+                  <SwiperSlide>
+                    <div className="flex justify-center bg-white">
+                      <div className="relative w-[150px] h-[150px]">
+                        <Image layout="fill" objectFit="fill" src={item.images[0].url} quality={100} />
+                      </div>
                     </div>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div className="flex justify-center bg-white">
-                    <div className="relative w-[200px] h-[150px]">
-                      <Image layout="fill" objectFit="fill" src={item.images[1].url} quality={100} />
+                  </SwiperSlide>
+                ) : (
+                  <></>
+                )}
+                {item.images[1] ? (
+                  <SwiperSlide>
+                    <div className="flex justify-center bg-white">
+                      <div className="relative w-[200px] h-[150px]">
+                        <Image layout="fill" objectFit="fill" src={item.images[1].url} quality={100} />
+                      </div>
                     </div>
-                  </div>
-                </SwiperSlide>
+                  </SwiperSlide>
+                ) : (
+                  <></>
+                )}
               </Swiper>
             ) : (
               <></>
