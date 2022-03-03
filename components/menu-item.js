@@ -58,29 +58,33 @@ export default function MenuItem({ item, flavorOfTheMonth }) {
           {!item.images || !item.images.length || !item.images[0] || !item.images[1]}
           {/* <Image height={100} width={100} src="/cookie.png" /> */}
           <div className="max-w-full flex justify-center items-center">
-            <Swiper
-              loop
-              allowTouchMove={false}
-              speed={2000}
-              effect="fade"
-              autoplay={{ delay: 5000 }}
-              modules={[Autoplay, EffectFade]}
-            >
-              <SwiperSlide>
-                <div className="flex justify-center bg-white">
-                  <div className="relative w-[150px] h-[150px]">
-                    <Image layout="fill" objectFit="fill" src={item.images[0].url} quality={100} />
+            {item?.images && item?.images?.length > 1 ? (
+              <Swiper
+                loop
+                allowTouchMove={false}
+                speed={2000}
+                effect="fade"
+                autoplay={{ delay: 5000 }}
+                modules={[Autoplay, EffectFade]}
+              >
+                <SwiperSlide>
+                  <div className="flex justify-center bg-white">
+                    <div className="relative w-[150px] h-[150px]">
+                      <Image layout="fill" objectFit="fill" src={item.images[0].url} quality={100} />
+                    </div>
                   </div>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className="flex justify-center bg-white">
-                  <div className="relative w-[200px] h-[150px]">
-                    <Image layout="fill" objectFit="fill" src={item.images[1].url} quality={100} />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div className="flex justify-center bg-white">
+                    <div className="relative w-[200px] h-[150px]">
+                      <Image layout="fill" objectFit="fill" src={item.images[1].url} quality={100} />
+                    </div>
                   </div>
-                </div>
-              </SwiperSlide>
-            </Swiper>
+                </SwiperSlide>
+              </Swiper>
+            ) : (
+              <></>
+            )}
           </div>
           <div className="flex-grow">
             <h3 className="text-yellow-600 font-normal text-lg md:text-2xl mt-4 px-6">{item.name}</h3>
