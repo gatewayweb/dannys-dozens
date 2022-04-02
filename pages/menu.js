@@ -7,7 +7,6 @@ import { getMenuPage } from '@/lib/api';
 
 export default function Menu({ page, menu }) {
   const menuItems = menu?.menuItems;
-  console.log(menu.flavorOfTheMonth);
 
   return (
     <>
